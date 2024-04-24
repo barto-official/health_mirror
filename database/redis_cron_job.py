@@ -69,8 +69,6 @@ def cache_data_in_redis(key, data):
         except Exception as e:
             print(f"Error caching data in Redis: {e}")
 
-
-
 # Main function to update cache
 def update_cache(user_id):
     key = f"user_data:{user_id}"
@@ -79,7 +77,6 @@ def update_cache(user_id):
         cache_data_in_redis(key, data)
     else:
         print('No data fetched from MySQL or empty dataset.')
-
 
 if __name__ == "__main__":
     update_cache(USER_ID)
