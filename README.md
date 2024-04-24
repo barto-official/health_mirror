@@ -21,7 +21,7 @@ The system is designed primarily for non-technical users who seek straightforwar
    * Huawei Watch GT 3-712 (Model JPT-B19) (Smartwatch) — records user activity, calculates health-related metrics, and saves data to Huawei Health iOS application.
    * Apple iPhone 13 — records user activity, calculates health-related metrics, and saves data to Apple Health iOS application. This application also aggregates data from smartwatch so behaves as a central repository on device.
 
-2. Device-Cloud Transfer: Data is transferred from Apple Health to third-party application — [Health Auto Export] (https://github.com/Lybron/health-auto-export) — which is responsible for device-cloud transfer. The transfer is executed with the following configuration:
+2. Device-Cloud Transfer: Data is transferred from Apple Health to third-party application — [Health Auto Export](https://github.com/Lybron/health-auto-export) — which is responsible for device-cloud transfer. The transfer is executed with the following configuration:
    * 15 Health Metrics to transfer (out of over 100 available): Active Energy (kJ), Resting Heart Rate (bpm), Flights Climbed (count), Headphone Audio Exposure (dBASPL — Sound Pressure Level), Step Count (count), Resting Energy (kJ), Heart Rate [Min] (bpm), Heart Rate [Max] (bpm), Heart Rate [Avg] (bpm), Step Count (steps), Walking+Running Distance (km), Walking Speed (km/hr), Walking Step Length (cm), Walking Asymmetry Percentage (%), Walking Double Support Percentage (%)
    * Period of data to transfer: Since the Last Synchronization
    * Aggregation level: Hour
@@ -31,7 +31,7 @@ The system is designed primarily for non-technical users who seek straightforwar
   Data is sent in the JSON format based on HTTP Trigger to RestAPI and follows the timestamped-based schema. Health Auto Export does not share this data, does not include any third-party software development kits (SDKs), and does not    share data.
 
 3. Cloud Processing: Data is sent to REST API in the form of Azure Function App. It accepts data in a JSON format, process it, and inserts data into MySQL database, which is also stored on Azure. 
-4. Edge Device Processing: User interacts with the system through the touchscreen connected to Raspberry Pi and a [Magic Mirror] (https://magicmirror.builders/) module, which serves as a user-friendly interface. If device is active, it hosts two processes:
+4. Edge Device Processing: User interacts with the system through the touchscreen connected to Raspberry Pi and a [Magic Mirror](https://magicmirror.builders/) module, which serves as a user-friendly interface. If device is active, it hosts two processes:
   * Redis database —  an in-memory caching database that stores data from the last 7 days.
     * It updates data by calling MySQL every three hours using cron jobs (`0 */3 * * * /usr/bin/python3 /path/to/your/script.py`) and stores data for 24 hours or until the update using new fresh data (`key_expiry == 86400`). You can set up this parameter while using `r.set()` function. This serves as aprotecting mechanism in case of retrieval failure.
     * Redis is configured to include Append Only File (AOF) mode which controls Redis persistence mode and how it logs every write operation to a file: `appendfsync` parameter is set to `always`. To make this changes, open Redis conf file and change `appendonly == yes` and `appendfsync == always`.
