@@ -1,4 +1,4 @@
-# health_mirror
+# Rasperrby PI-based Health Management Platform
 
 This repository contains a code and necessary technical details for a Raspberry PI-based prototype of the health management platform. 
 
